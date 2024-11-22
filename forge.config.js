@@ -4,6 +4,11 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
+    extendInfo: {
+      "NSCameraUsageDescription": "This app requires access to your camera to function properly.",
+      "com.apple.security.device.camera": true,
+      "NSCameraUseContinuityCameraDeviceType": true
+    },
   },
   rebuildConfig: {},
   makers: [

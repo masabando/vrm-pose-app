@@ -1,5 +1,7 @@
 # VRM Pose App
 
+![screenshot](screenshot.jpg)
+
 Webカメラを使ってトラッキングしてVRMモデルを動かせるアプリです。
 
 Electronで
@@ -7,6 +9,10 @@ Electronで
 プロジェクトの
 [デモページ](https://masabando.github.io/mediapipe-vrm-pose/)
 を表示しています。
+
+## ダウンロード
+* [Windows x64 (to be released)]()
+* [Mac (Apple Silicon)]()
 
 ## 使い方
 

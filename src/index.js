@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, systemPreferences } = require('electron');
 const path = require('node:path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -19,6 +19,14 @@ const createWindow = () => {
     hasShadow: false,
     alwaysOnTop: true,
     webPreferences: {
+      contextIsolation: true,
+      enableRemoteModule: false,
+      nodeIntegration: false,
+      webSecurity: false,
+      sandbox: false,
+      permissions: {
+        media: true,
+      },
       devTools: false,
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -27,10 +35,22 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   //mainWindow.loadFile(path.join(__dirname, 'index.html'));
-  mainWindow.loadURL("https://masabando.github.io/mediapipe-vrm-pose/")
+  if (process.platform === 'darwin') {
+    (async () => {
+      await systemPreferences.askForMediaAccess('camera');
+
+      mainWindow.loadURL("https://masabando.github.io/mediapipe-vrm-pose/")
+    })();
+  } else {
+    mainWindow.loadURL("https://masabando.github.io/mediapipe-vrm-pose/")
+  }
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
+
+  // mainWindow.on('show', async () => {
+  //   await systemPreferences.askForMediaAccess('camera')
+  // })
 };
 
 
